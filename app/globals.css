@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
+/* ── Design tokens ───────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:         #f5f5f0;
+  --bg-alt:     #ebebeb;
+  --fg:         #0a0a0a;
+  --fg-muted:   #555550;
+  --accent:     #ea580c;
+  --accent-h:   #c2410c;
+  --border:     #d4d4cc;
+}
+
+.dark {
+  --bg:         #0a0a0a;
+  --bg-alt:     #141414;
+  --fg:         #f0f0ec;
+  --fg-muted:   #888880;
+  --accent:     #f97316;
+  --accent-h:   #ea580c;
+  --border:     #2a2a2a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg:         var(--bg);
+  --color-bg-alt:     var(--bg-alt);
+  --color-fg:         var(--fg);
+  --color-fg-muted:   var(--fg-muted);
+  --color-accent:     var(--accent);
+  --color-accent-h:   var(--accent-h);
+  --color-border:     var(--border);
   --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-playfair);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ────────────────────────────────────────── */
+* {
+  border-color: var(--border);
+  transition: background-color 0.25s ease, color 0.2s ease,
+              border-color 0.2s ease;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Slider progress bar ─────────────────────────── */
+@keyframes progressBar {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
