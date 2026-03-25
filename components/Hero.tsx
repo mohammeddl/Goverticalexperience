@@ -13,13 +13,6 @@ const slides = [
   { src: "/images/pexels-photo-2666598.jpeg",   alt: "Adventure camp", title: "Bivouac" },
 ];
 
-const MountainIcon = () => (
-  <svg className="w-12 h-12 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M20 21l-8-12-8 12M16 21l-4-6-4 6M12 21l-2-3-2 3" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3a9 9 0 110 18 9 9 0 010-18z" opacity="0.2" />
-  </svg>
-);
-
 const INTERVAL_MS = 5000;
 
 export default function Hero() {
@@ -85,25 +78,27 @@ export default function Hero() {
       >
         <div className="flex flex-row lg:items-end justify-between gap-10 mb-12">
           <h1 className="font-extrabold leading-[0.85] tracking-tight uppercase select-none lg:text-left">
-            <span ref={headlineLine1Ref} className="block lg:text-[110px] xl:text-[130px] lg:text-fg">
+            <span ref={headlineLine1Ref} className="block lg:text-[100px] xl:text-[120px] lg:text-fg">
               Outdoor
             </span>
-            <span ref={headlineLine2Ref} className="block lg:text-[110px] xl:text-[130px] text-accent mt-4">
-              Adventures
+            <span className="block lg:text-5xl xl:text-6xl text-fg mt-4 normal-case font-medium">
+              Adventures in the
+            </span>
+            <span ref={headlineLine2Ref} className="block lg:text-[100px] xl:text-[120px] text-accent mt-2">
+              Anti-Atlas
             </span>
           </h1>
 
           <div ref={ctaColRef} className="lg:w-1/3 flex flex-col items-end lg:text-right gap-6 pb-2">
             <p className="lg:text-fg-muted text-lg max-w-sm leading-relaxed font-medium lg:text-right">
-              Your next adventure starts here.<br/>
-              Experience the authentic beauty of Morocco's hidden gem in the heart of the Anti-Atlas.
+              Experience the authentic beauty of Morocco's hidden gem
             </p>
             <div className="flex flex-wrap lg:justify-end gap-4">
               <Link
                 href="/activities"
                 className="px-10 py-4 bg-accent hover:bg-accent-h text-white font-bold rounded-full text-lg transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/20"
               >
-                Start Now
+                Explore Activities
               </Link>
               <Link
                 href="/contact"
@@ -173,86 +168,98 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ── Mobile Hero (App Style) ── */}
-      <section className="lg:hidden relative min-h-screen bg-bg flex flex-col">
-        {/* Top Visual area */}
-        <div className="relative h-[55vh] w-full overflow-hidden">
-          {slides.map((slide, i) => (
-            <div
-              key={slide.src}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                i === current ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image 
-                src={slide.src} 
-                alt={slide.alt} 
-                fill 
-                className="object-cover" 
-                priority={i === 0}
-              />
-            </div>
-          ))}
-          {/* Top-to-Bottom Gradient Fades */}
-          <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-bg" />
-          
-          {/* Centered Icon area */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-            <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-2xl">
-              <MountainIcon />
-            </div>
-          </div>
+      {/* ── Mobile Hero (Modern Editorial - Version 5) ── */}
+      <section className="lg:hidden relative min-h-screen bg-bg flex flex-col pt-24 pb-12 transition-all duration-500">
+        
+        {/* Headline Section */}
+        <div className="px-6 flex flex-col gap-2">
+          <h1 className="text-[2.75rem] font-black text-fg leading-[1.1] tracking-[-0.03em]">
+            Outdoor <br />
+            Adventures <br />
+            <span className="text-accent underline decoration-4 underline-offset-8">Anti-Atlas</span>
+          </h1>
+        </div>
 
-          {/* "Popular Destinations" Label + Row */}
-          <div className="absolute bottom-12 left-0 right-0 z-20">
-            <p className="px-6 text-white/80 text-xs font-bold uppercase tracking-[0.2em] mb-4 text-center">
-              Popular Adventures
-            </p>
-            <div className="flex gap-4 overflow-x-auto px-6 pb-4 no-scrollbar snap-x">
-              {slides.map((slide, i) => (
-                <button
-                  key={slide.src}
-                  onClick={() => setCurrent(i)}
-                  className={`relative flex-none w-28 aspect-4/5 rounded-2xl overflow-hidden snap-start transition-all duration-500 ${
-                    i === current ? "ring-2 ring-accent scale-105 shadow-xl" : "opacity-60 grayscale-[0.5]"
-                  }`}
-                >
-                  <Image src={slide.src} alt={slide.alt} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/20" />
-                  <span className="absolute bottom-2 left-0 right-0 text-[10px] font-bold text-white uppercase text-center">
-                    {slide.title}
-                  </span>
-                </button>
-              ))}
+        {/* Featured Image Card */}
+        <div className="px-6 mt-10">
+          <div className="relative aspect-[4/5] w-full rounded-[3rem] overflow-hidden shadow-2xl group">
+            {slides.map((slide, i) => (
+              <div
+                key={slide.src}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  i === current ? "opacity-100 scale-105" : "opacity-0 scale-100"
+                }`}
+              >
+                <Image 
+                  src={slide.src} 
+                  alt={slide.alt} 
+                  fill 
+                  className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                  priority={i === 0}
+                />
+              </div>
+            ))}
+            {/* Corner Label */}
+            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+              <span className="text-[10px] font-black uppercase tracking-widest text-black">Featured Expedition</span>
+            </div>
+            {/* Bottom Overlay Info */}
+            <div className="absolute inset-x-0 bottom-0 p-8 bg-linear-to-t from-black/80 via-black/20 to-transparent flex flex-col gap-2">
+              <span className="text-white/60 text-[10px] font-bold uppercase tracking-[0.3em]">Destination</span>
+              <h2 className="text-white text-3xl font-bold">{slides[current].title}</h2>
             </div>
           </div>
         </div>
 
-        {/* Bottom Content area */}
-        <div className="flex-1 px-6 pt-8 pb-12 flex flex-col items-center justify-between text-center bg-bg relative -mt-4 rounded-t-4xl z-30">
-          <div className="flex flex-col items-center gap-4">
-            <h1 className="font-serif text-4xl sm:text-5xl text-fg leading-tight">
-              Discover the Wild <br />
-              <span className="text-accent italic">Beauty of Morocco</span>
-            </h1>
-            <p className="text-fg-muted text-sm max-w-xs leading-relaxed">
-              Explore curated adventures, plan your perfect trip, and uncover the wonders of the Anti-Atlas in just one click.
+        {/* Description & Main Button */}
+        <div className="px-6 mt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div className="max-w-[280px]">
+            <p className="text-fg-muted text-sm leading-relaxed font-medium">
+              amidst the quietness of authentic <br /> 
+              and spontaneous nature. Discover the <br /> 
+              hidden gems of the Anti-Atlas.
             </p>
           </div>
+          <Link
+            href="/activities"
+            className="inline-flex items-center gap-4 px-8 py-4 bg-fg text-bg rounded-full text-sm font-black uppercase tracking-widest hover:bg-fg-muted transition-colors w-fit"
+          >
+            Explore More
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </Link>
+        </div>
 
-          <div className="flex flex-col w-full gap-3 mt-8">
-            <Link
-              href="/activities"
-              className="w-full py-4 bg-fg text-bg font-bold rounded-2xl shadow-xl hover:scale-[0.98] transition-transform"
-            >
-              Explore Adventures
-            </Link>
-            <Link
-              href="/contact"
-              className="w-full py-4 border border-border text-fg font-bold rounded-2xl hover:bg-bg-alt transition-colors"
-            >
-              Plan My Trip
-            </Link>
+        {/* Horizontal Selection ("Our Products" style) */}
+        <div className="mt-16">
+          <div className="px-6 flex justify-between items-end mb-6">
+            <h3 className="text-2xl font-black text-fg">Our Selection</h3>
+            <div className="flex gap-2">
+              <div className="w-8 h-1 bg-accent rounded-full" />
+              <div className="w-2 h-1 bg-border rounded-full" />
+            </div>
+          </div>
+          
+          <div className="flex gap-4 overflow-x-auto px-6 no-scrollbar snap-x pb-4">
+            {slides.map((slide, i) => (
+              <button
+                key={slide.src}
+                onClick={() => setCurrent(i)}
+                className="flex-none w-48 snap-start group"
+              >
+                <div className={`relative aspect-square w-full rounded-3xl overflow-hidden mb-4 transition-all duration-300 ${
+                  i === current ? "ring-2 ring-accent" : "bg-bg-alt"
+                }`}>
+                  <Image src={slide.src} alt={slide.alt} fill className="object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-accent mb-1">Adventure</span>
+                  <span className="text-sm font-bold text-fg group-hover:text-accent transition-colors">{slide.title}</span>
+                  <span className="text-[10px] font-medium text-fg-muted uppercase tracking-wider mt-0.5">Starting from $199</span>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "@/components/ThemeProvider";
 
 const navLinks = [
@@ -14,11 +14,23 @@ const navLinks = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggle } = useTheme();
 
+  // Scroll detection
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border">
-      <div className="mx-auto flex items-center justify-between px-6 py-4 md:px-12 max-w-7xl">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? "bg-bg/80 backdrop-blur-md border-b border-border py-4" 
+        : "bg-transparent border-b border-transparent py-6"
+    }`}>
+      <div className="mx-auto flex items-center justify-between px-6 md:px-12 max-w-7xl">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
